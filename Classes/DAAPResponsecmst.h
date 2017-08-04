@@ -45,7 +45,7 @@
 @property (nonatomic, copy) NSString *cang;
 @property (nonatomic, retain) NSNumber *asai;
 @property (nonatomic, retain) NSNumber *cmmk;
-@property (nonatomic, retain, setter=setCegs) NSNumber *ceGS;
+@property (nonatomic, retain, setter=setCegs:) NSNumber *ceGS;
 @property (nonatomic, retain) NSNumber *cant;
 @property (nonatomic, retain) NSNumber *cast;
 

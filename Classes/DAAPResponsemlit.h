@@ -44,10 +44,10 @@
 @property (nonatomic, retain) NSNumber *meds;
 @property (nonatomic, retain) NSNumber *abpl;
 @property (nonatomic, retain) NSNumber *mpco;
-@property (nonatomic, retain, setter=setAesp) NSNumber *aeSP;
-@property (nonatomic, retain, setter=setAeps) NSNumber *aePS;
+@property (nonatomic, retain, setter=setAesp:) NSNumber *aeSP;
+@property (nonatomic, retain, setter=setAeps:) NSNumber *aePS;
 @property (nonatomic, retain) NSNumber *asai;
-@property (nonatomic, retain, setter=setAesi) NSNumber *aeSI;
+@property (nonatomic, retain, setter=setAesi:) NSNumber *aeSI;
 @property (nonatomic, retain, getter=songTrackNumber) NSNumber *astn;
 @property (nonatomic, retain) NSNumber *astm;
 @property (nonatomic, retain) NSNumber *assp;

@@ -40,13 +40,13 @@
 @property (retain, nonatomic) NSNumber  *mstt;
 @property (retain, nonatomic) NSNumber  *mpro;
 @property (retain, nonatomic) NSNumber  *apro;
-@property (retain, nonatomic, setter=setAesv) NSNumber  *aeSV;
-@property (retain, nonatomic, setter=setAefp) NSNumber  *aeFP;
+@property (retain, nonatomic, setter=setAesv:) NSNumber  *aeSV;
+@property (retain, nonatomic, setter=setAefp:) NSNumber  *aeFP;
 @property (retain, nonatomic) NSNumber  *ated;
 @property (retain, nonatomic) NSNumber  *msed;
 @property (retain, nonatomic) NSNumber  *msml;
-@property (retain, nonatomic, setter=setCewm) NSString  *ceWM;
-@property (retain, nonatomic, setter=setCevo) NSNumber  *ceVO;
+@property (retain, nonatomic, setter=setCewm:) NSString  *ceWM;
+@property (retain, nonatomic, setter=setCevo:) NSNumber  *ceVO;
 @property (copy, nonatomic) NSString  *minm;
 @property (retain, nonatomic) NSNumber  *mslr;
 @property (retain, nonatomic) NSNumber  *mstm;
