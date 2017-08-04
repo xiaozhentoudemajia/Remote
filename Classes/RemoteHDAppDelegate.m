@@ -22,7 +22,9 @@
 
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window.rootViewController = [[UIViewController alloc] init];
+    
 	[DDLog addLogger:[DDConsoleLogger sharedInstance]];
 	DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
 	fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
