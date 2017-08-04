@@ -1,0 +1,20 @@
+//
+// Prefix header for all source files of the 'RemoteHD' target in the 'RemoteHD' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define cellColoredBackground RGBCOLOR(245,245,247)
+
+#define kNotificationConnected @"connected"
+#define kNotificationConnectionLost @"connectionLost"
+#define kNotificationStatusUpdate @"statusUpdate"
+#define kNotificationTryReconnect @"tryReconnect"
+#define kNotificationFinishReconnect @"finishReconnecting"
+#define kNotificationBrokenConnection @"brokenConnection"
+#define kNotificationTimerTicks @"timerTicks"
+
+#endif

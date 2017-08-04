@@ -1,0 +1,40 @@
+/* 
+   Localizable.strings
+   RemoteHD
+
+   Created by Fabrice Dewasmes on 25/06/10.
+   Copyright 2010 Fabrice Dewasmes. All rights reserved.
+ */
+
+"rejectedAlertTitle" = "Télécommande rejetée";
+"rejectedAlertContent" = "L'enregistrement de cette télécommande a été annulé. Veuillez sélectionner une autre bibliothèque";
+
+"notConnected" = "Vous n'êtes connecté à aucune bibliothèque\nVeuillez sélectionner le bouton en bas à gauche de l'écran";
+"brokenConnection" = "La communication avec la bibliothèque n'a pas pu être établie\nVeuillez sélectionner une autre bibliothèque";
+"loading" = "Chargement en cours...";
+"library" = "Bibliothèque";
+"music"= "Musique";
+"books" = "Livres audio";
+"podcasts" = "Podcasts";
+"playlists" = "Listes";
+"Tracks" = "Morceaux";
+"Albums" = "Albums";
+"Artists" = "Artistes";
+"nowPlaying" = "A l'écoute";
+"BackLabel" = "Retour";
+"settings" = "Réglages";
+
+// LibrariesController
+"iTunesLibraries" = "Bibliothèques de musique";
+"remoteSpeakers" = "Haut parleurs";
+"Edit" = "Modifier";
+"Done" = "OK";
+"addLibrary" = "Ajouter une bibliothèque";
+"volumeControl" = "Contrôle du volume";
+"Options" = "Options";
+
+// PinCode
+"pincodeTip" = "Pour ajouter une bibliothèque iTunes, ouvrez iTunes puis sélectionnez votre iPad dans la liste d'appareils.";
+"cancelButton" = "Annuler";
+
+"TracksDefaultName" = "Pistes";

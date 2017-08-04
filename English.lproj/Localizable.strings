@@ -1,0 +1,41 @@
+/* 
+   Localizable.strings
+   RemoteHD
+
+   Created by Fabrice Dewasmes on 25/06/10.
+   Copyright 2010 Fabrice Dewasmes. All rights reserved.
+ */
+
+// RemoteHDViewController
+"rejectedAlertTitle" = "Remote rejected";
+"rejectedAlertContent" = "Your remote has been rejected by server. Please select another library";
+
+"notConnected" = "You are currently not connected to any library\nPlease tap the bottom left menu button for settings";
+"brokenConnection" = "The connection with the library could not be established\nTry to select another library";
+"loading" = "loading...";
+"library" = "Library";
+"music"= "Music";
+"books" = "Books";
+"podcasts" = "Podcasts";
+"playlists" = "Playlists";
+"Tracks" = "Tracks";
+"Albums" = "Albums";
+"Artists" = "Artists";
+"nowPlaying" = "Now playing";
+"BackLabel" = "Back";
+"settings" = "Settings";
+
+// LibrariesController
+"iTunesLibraries" = "Music libraries";
+"remoteSpeakers" = "Remote speakers";
+"Edit" = "Edit";
+"Done" = "Done";
+"addLibrary" = "Add Library";
+"volumeControl" = "Volume Control";
+"Options" = "Options";
+
+// PinCode
+"pincodeTip" = "To add an iTunes library, open iTunes and select your iPad from the Devices list";
+"cancelButton" = "Cancel";
+
+"TracksDefaultName" = "Tracks";
