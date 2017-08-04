@@ -145,7 +145,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	if (error != nil) {
-		DDLogError(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+		//DDLogError(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBrokenConnection object:self];
 	}
 #ifdef CONFIGURATION_DEBUG
@@ -222,7 +222,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		return NO;
     }
 	if (error != nil) {
-		DDLogError(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+//		DDLogError(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 		return NO;
 	}
 	return YES;
