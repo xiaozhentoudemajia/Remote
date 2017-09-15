@@ -10,6 +10,7 @@
 #import "HTTPServer.h"
 #import "MyHTTPConnection.h"
 #import "DAAPRequestReply.h"
+#import "DeviceList.h"
 
 @protocol PincodeDelegate
 
@@ -17,7 +18,7 @@
 
 @end
 
-@interface PinCodeController : UIViewController <PairingServerDelegate>{
+@interface PinCodeController : UIViewController <PairingServerDelegate, UITableViewDataSource,UITableViewDelegate>{
 	id<PincodeDelegate> delegate;
 	HTTPServer *httpServer;
 	IBOutlet UILabel *pinCode1;
@@ -31,6 +32,7 @@
 }
 
 @property (nonatomic, assign) id<PincodeDelegate> delegate;
+@property(strong,nonatomic) DeviceList *devicelist;
 
 - (IBAction) cancelButtonPressed:(id)sender;
 
