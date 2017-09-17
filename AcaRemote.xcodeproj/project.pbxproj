@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* RemoteHDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* RemoteHDViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* RemoteHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */; };
+		65327DCA1F6E0A7000DF7FE0 /* DeviceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 65327DC91F6E0A7000DF7FE0 /* DeviceList.m */; };
 		6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */; };
 		6B056B2711C04114008EF26B /* DAAPResponsemshl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B056B2611C04113008EF26B /* DAAPResponsemshl.m */; };
 		6B1121691238CEB30094F2DC /* genius-icon-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B1121671238CEB30094F2DC /* genius-icon-inv.png */; };
@@ -177,6 +178,8 @@
 		28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteHDViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* RemoteHD_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteHD_Prefix.pch; sourceTree = "<group>"; };
+		65327DC81F6E0A7000DF7FE0 /* DeviceList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceList.h; sourceTree = "<group>"; };
+		65327DC91F6E0A7000DF7FE0 /* DeviceList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceList.m; sourceTree = "<group>"; };
 		6B008C7011B31194008E2012 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		6B008C7111B31194008E2012 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		6B056B2511C04113008EF26B /* DAAPResponsemshl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemshl.h; sourceTree = "<group>"; };
@@ -758,6 +761,8 @@
 		6BF29EA31207F11F004233D9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				65327DC81F6E0A7000DF7FE0 /* DeviceList.h */,
+				65327DC91F6E0A7000DF7FE0 /* DeviceList.m */,
 				6BA2F9F811A4E63B00427C2F /* LibrariesViewController.h */,
 				6BA2F9F911A4E63B00427C2F /* LibrariesViewController.m */,
 				6BA2F9FA11A4E63B00427C2F /* LibrariesViewController.xib */,
@@ -971,6 +976,7 @@
 				6B75F82F11A4094100B9D841 /* DAAPResponsemsrv.m in Sources */,
 				6B75F83011A4094100B9D841 /* DDData.m in Sources */,
 				6B75F83111A4094100B9D841 /* DDNumber.m in Sources */,
+				65327DCA1F6E0A7000DF7FE0 /* DeviceList.m in Sources */,
 				6B75F83211A4094100B9D841 /* DDRange.m in Sources */,
 				6B75F83411A4094100B9D841 /* HexDumpUtility.m in Sources */,
 				8E7152531F67D89200512017 /* DDLog.m in Sources */,
