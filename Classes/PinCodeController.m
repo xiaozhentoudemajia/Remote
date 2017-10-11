@@ -22,6 +22,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 // NSNetService在客户端用于解析
 @property(nonatomic, strong)NSMutableArray *services;
 @property(strong,nonatomic)NSMutableArray *serverNameArray;
+@property(strong,nonatomic)NSMutableArray *ctlnArray;
 @property(strong,nonatomic)NSMutableArray *serverIpArray;
 @property (nonatomic, copy)NSMutableArray *serverImageArray;
 @property(strong,nonatomic)UITableView *serverList;
@@ -84,6 +85,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [self.serverBrowser searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
 
     self.serverNameArray = [NSMutableArray array];
+    self.ctlnArray = [NSMutableArray array];
     self.serverIpArray = [NSMutableArray array];
     self.serverImageArray = [NSMutableArray array];
 }
@@ -185,7 +187,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     }
 
     // 设置cell上文本内容
-    cell.textLabel.text         = [self.serverNameArray objectAtIndex:indexPath.row];
+    cell.textLabel.text         = [self.ctlnArray objectAtIndex:indexPath.row];
     cell.imageView.image        = [self.serverImageArray objectAtIndex:indexPath.row];
 
     return cell;
@@ -233,9 +235,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [_services addObject:service];
     service.delegate = self;
     // 设置解析超时时间
-    [service resolveWithTimeout:2.0];
+    [service resolveWithTimeout:5.0];
 
     [self.serverNameArray addObject:service.name];
+    [self.ctlnArray addObject:service.name];
 
     if (!moreComing) {
         // 初始化
@@ -267,6 +270,30 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSString *serverIp = [NSString stringWithUTF8String:inet_ntoa(socketAddress->sin_addr)];
     DDLogVerbose(@"resolve server... ip:%@, hostName:%@, serverName:%@, text:%s, length:%d",serverIp,hostName,serverName,textData,lenth);
     [self.serverIpArray addObject:serverIp];
+
+    // 查找CltN键值
+    NSString *txt = [[NSString alloc] initWithCString:(const char*)textData encoding:NSASCIIStringEncoding];
+    NSRange range1 = [txt rangeOfString:@"CtlN="];
+    NSRange range2 = [txt rangeOfString:@"Service="];
+
+    if (range1.location != NSNotFound && range2.location != NSNotFound) {
+        NSRange range3 = NSMakeRange(0, 0);
+        range3.location = range1.location + 5;
+        range3.length = range2.location - range3.location;
+        if (range3.length < txt.length) {
+            NSString *ctln = [txt substringWithRange:range3];
+            DDLogVerbose(@"index = %@", ctln);
+
+            // 将serverName替换为CtlN键值
+            uint index = [self.ctlnArray indexOfObject:serverName];
+            [self.ctlnArray replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%@    %@",serverIp,ctln]];
+
+            // reload view
+            [self.serverList reloadData];
+        }else{
+            DDLogError(@"range error!");
+        }
+    }
 }
 
 // 解析服务失败
