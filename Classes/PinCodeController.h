@@ -10,7 +10,6 @@
 #import "HTTPServer.h"
 #import "MyHTTPConnection.h"
 #import "DAAPRequestReply.h"
-#import "DeviceList.h"
 
 @protocol PincodeDelegate
 
@@ -32,7 +31,6 @@
 }
 
 @property (nonatomic, assign) id<PincodeDelegate> delegate;
-@property(strong,nonatomic) DeviceList *devicelist;
 
 - (IBAction) cancelButtonPressed:(id)sender;
 

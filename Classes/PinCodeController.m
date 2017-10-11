@@ -7,7 +7,25 @@
 //
 
 #import "PinCodeController.h"
+#import "DDLog.h"
+#import <arpa/inet.h>
 
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
+
+@interface PinCodeController ()
+// 客户端主要使用的是iOS SDK里的NSNetServiceBrowser
+@property(strong,nonatomic)NSNetServiceBrowser *serverBrowser;
+// NSNetService在客户端用于解析
+@property(nonatomic, strong)NSMutableArray *services;
+@property(strong,nonatomic)NSMutableArray *serverNameArray;
+@property(strong,nonatomic)NSMutableArray *serverIpArray;
+@property (nonatomic, copy)NSMutableArray *serverImageArray;
+@property(strong,nonatomic)UITableView *serverList;
+@end
 
 @implementation PinCodeController
 
@@ -49,25 +67,25 @@
 	 NSError *error;
 	 if(![httpServer start:&error])
 	 {
-	 NSLog(@"Error starting HTTP Server: %@", error);
+         DDLogError(@"Error starting HTTP Server: %@", error);
 	 }
 
-    // add device list view
-    // 初始化
-    self.devicelist=[[DeviceList alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    // 设置数据源
-    self.devicelist.textLabel_MArray=[[NSMutableArray alloc] initWithObjects:@"9924F359312A63C4_diningroom_ACA-0184",@"B6EF21A6E863DC73", nil];
-
-    NSMutableArray *images  = [NSMutableArray array];
-    for(NSInteger index = 0;index<[self.devicelist.textLabel_MArray count];index++){
-        UIImage *image      = [UIImage imageNamed:@"settings"];
-        [images addObject:image];
+    // 初始化NSNetServiceBrowser
+    NSNetServiceBrowser *aNetServiceBrowser = [[NSNetServiceBrowser alloc] init];
+    if(!aNetServiceBrowser) {
+        // The NSNetServiceBrowser couldn't be allocated and initialized.
+        DDLogError(@"aNetServiceBrowser is nil");
     }
-    self.devicelist.images_MArray     = [[NSMutableArray alloc] initWithArray:images];
-    self.devicelist.delegate = self;
-    self.devicelist.dataSource = self;
-    // 添加到当前View
-    [self.view addSubview:self.devicelist];
+    // 指定代理
+    aNetServiceBrowser.delegate = self;
+    self.serverBrowser = aNetServiceBrowser;
+    // 查找服务
+    // 接着使用NSNetServiceBrowser实例的searchForServicesOfType方法查找服务，方法中可以指定需要查找的服务类型和查找的域
+    [self.serverBrowser searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
+
+    self.serverNameArray = [NSMutableArray array];
+    self.serverIpArray = [NSMutableArray array];
+    self.serverImageArray = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -101,7 +119,7 @@
 	NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(tryClosingServer:) userInfo:nil repeats:YES];
 	[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	NSString * guidStr = [NSString stringWithFormat:@"%08X%08X",GUID,GUID];
-    NSLog(@"www serviceName=%@, guidStr=%@", serviceName, guidStr);
+    DDLogVerbose(@"www serviceName=%@, guidStr=%@", serviceName, guidStr);
 	[delegate didFinishWithPinCode:serviceName guid:guidStr];
 }
 
@@ -114,6 +132,11 @@
 }
 
 - (IBAction) cancelButtonPressed:(id)sender{
+    for (NSNetService* service in self.services) {
+        [service stop];
+    }
+    [self.services removeAllObjects];
+
 	[httpServer stop];
 	[delegate didFinishWithPinCode:nil guid:nil];
 }
@@ -137,12 +160,12 @@
     [super dealloc];
 }
 
-#pragma mark delegate
+#pragma mark tableView delegate
 // tableView每个分区的行数，可以为各个分区设置不同的行数，根据section的值判断即可
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"_textLabel_MArray conut=%lu",(unsigned long)[self.devicelist.textLabel_MArray count]);
-    return [self.devicelist.textLabel_MArray count];
+    DDLogVerbose(@"serverName conut=%lu",(unsigned long)[self.serverNameArray count]);
+    return [self.serverNameArray count];
 }
 
 // 实现每一行Cell的内容，tableView重用机制
@@ -162,8 +185,8 @@
     }
 
     // 设置cell上文本内容
-    cell.textLabel.text         = [self.devicelist.textLabel_MArray objectAtIndex:indexPath.row];
-    cell.imageView.image        = [self.devicelist.images_MArray objectAtIndex:indexPath.row];
+    cell.textLabel.text         = [self.serverNameArray objectAtIndex:indexPath.row];
+    cell.imageView.image        = [self.serverImageArray objectAtIndex:indexPath.row];
 
     return cell;
 }
@@ -177,13 +200,13 @@
 // tableView页眉的值，同理，可为不同的分区设置不同的页眉，也可不写此方法
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"页眉";
+    return @"Server List";
 }
 
 // 页脚
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"页脚";
+    return @"....";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,10 +217,62 @@
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
                                           otherButtonTitles:@"OK",nil];
-    alert.title = @"链接";
-    [alert show];//显示对话框
-    [self.delegate didFinishWithPinCode:@"9924F359312A63C4_diningroom_ACA-0184" guid:@"192.168.137.83"];
-    
+    DDLogVerbose(@"select server... ip:%@, serverName:%@", [self.serverIpArray objectAtIndex:indexPath.row], [self.serverNameArray objectAtIndex:indexPath.row]);
+    [self.delegate didFinishWithPinCode:[self.serverNameArray objectAtIndex:indexPath.row] guid:[self.serverIpArray objectAtIndex:indexPath.row]];
+}
+
+#pragma mark netServiceBrowser delegate
+- (void)netServiceBrowser:(NSNetServiceBrowser*)netServiceBrowser didFindService:(NSNetService*)service moreComing:(BOOL)moreComing
+{
+    DDLogVerbose(@"find server... name:%@", service.name);
+
+    if (!_services) {
+        _services = [[NSMutableArray alloc] init];
+    }
+
+    [_services addObject:service];
+    service.delegate = self;
+    // 设置解析超时时间
+    [service resolveWithTimeout:2.0];
+
+    [self.serverNameArray addObject:service.name];
+
+    if (!moreComing) {
+        // 初始化
+        self.serverList=[[UITableView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-360) style:UITableViewStylePlain];
+        // 设置数据源
+        NSMutableArray *images  = [NSMutableArray array];
+        for(NSInteger index = 0;index<[self.serverNameArray count];index++){
+            UIImage *image      = [UIImage imageNamed:@"settings"];
+            [images addObject:image];
+        }
+        self.serverImageArray = [[NSMutableArray alloc] initWithArray:images];
+        self.serverList.delegate = self;
+        self.serverList.dataSource = self;
+        // 添加到当前View
+        [self.view addSubview:self.serverList];
+    }
+}
+
+// 解析服务成功
+- (void)netServiceDidResolveAddress:(NSNetService *)netService {
+    //    [_service addObject:sender];
+    NSData *address = [netService.addresses firstObject];
+    struct sockaddr_in *socketAddress = (struct sockaddr_in *) [address bytes];
+    NSString *serverName = netService.name;
+    NSString *hostName = [netService hostName];
+    Byte *bytes = (Byte *)[[netService TXTRecordData] bytes];
+    int8_t lenth = (int8_t)bytes[0];
+    const void*textData = &bytes[1];
+    NSString *serverIp = [NSString stringWithUTF8String:inet_ntoa(socketAddress->sin_addr)];
+    DDLogVerbose(@"resolve server... ip:%@, hostName:%@, serverName:%@, text:%s, length:%d",serverIp,hostName,serverName,textData,lenth);
+    [self.serverIpArray addObject:serverIp];
+}
+
+// 解析服务失败
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary<NSString *,NSNumber *> *)errorDict
+{
+    DDLogError(@"didNotResolve");
 }
 
 @end
