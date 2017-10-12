@@ -17,6 +17,8 @@
 "music"= "Music";
 "books" = "Books";
 "podcasts" = "Podcasts";
+"shoutcast" = "Shoutcast";
+"spotify" = "Spotify";
 "playlists" = "Playlists";
 "Tracks" = "Tracks";
 "Albums" = "Albums";

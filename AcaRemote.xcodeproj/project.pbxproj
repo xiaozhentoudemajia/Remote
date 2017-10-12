@@ -162,6 +162,8 @@
 		8E7152531F67D89200512017 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7152481F67D89200512017 /* DDLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8E7152541F67D89200512017 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E71524C1F67D89200512017 /* DDOSLogger.m */; };
 		8E7152551F67D89200512017 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E71524E1F67D89200512017 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8EE762A71F8F687C0070675C /* ShoutcastController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE762A51F8F687C0070675C /* ShoutcastController.m */; };
+		8EE762A81F8F687C0070675C /* ShoutcastController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE762A61F8F687C0070675C /* ShoutcastController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -405,6 +407,9 @@
 		8E71524D1F67D89200512017 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = CocoaLumberjack/DDTTYLogger.h; sourceTree = "<group>"; };
 		8E71524E1F67D89200512017 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = CocoaLumberjack/DDTTYLogger.m; sourceTree = "<group>"; };
 		8EE08CD81F42C07B00C94893 /* AcaRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AcaRemote.entitlements; path = AcaRemote/AcaRemote.entitlements; sourceTree = "<group>"; };
+		8EE762A41F8F687C0070675C /* ShoutcastController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoutcastController.h; sourceTree = "<group>"; };
+		8EE762A51F8F687C0070675C /* ShoutcastController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoutcastController.m; sourceTree = "<group>"; };
+		8EE762A61F8F687C0070675C /* ShoutcastController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoutcastController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +431,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8EE762A31F8F68260070675C /* Shoutcast */,
 				6BB6AA9D123637E2001C9AD9 /* UIImage+Alpha.h */,
 				6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */,
 				6BB6AA9F123637E2001C9AD9 /* UIImage+RoundedCorner.h */,
@@ -805,6 +811,16 @@
 			name = "left menu";
 			sourceTree = "<group>";
 		};
+		8EE762A31F8F68260070675C /* Shoutcast */ = {
+			isa = PBXGroup;
+			children = (
+				8EE762A41F8F687C0070675C /* ShoutcastController.h */,
+				8EE762A51F8F687C0070675C /* ShoutcastController.m */,
+				8EE762A61F8F687C0070675C /* ShoutcastController.xib */,
+			);
+			name = Shoutcast;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -921,6 +937,7 @@
 				8E560B601F345F4A0056DF99 /* Images.xcassets in Resources */,
 				6B9D6D5812177C9E00D486DF /* back.png in Resources */,
 				6B9D6D5912177C9E00D486DF /* list.png in Resources */,
+				8EE762A81F8F687C0070675C /* ShoutcastController.xib in Resources */,
 				6BCDEABF1223B95900AADB13 /* detailbg2-landscape.png in Resources */,
 				6BCDEAEF1223CEE300AADB13 /* repeat-icon.png in Resources */,
 				6BCDEAF01223CEE300AADB13 /* shuffle-icon.png in Resources */,
@@ -1026,6 +1043,7 @@
 				6BB6AA9C123637CE001C9AD9 /* UIImage+Resize.m in Sources */,
 				6BB6AAA1123637E2001C9AD9 /* UIImage+Alpha.m in Sources */,
 				8E7152511F67D89200512017 /* DDASLLogger.m in Sources */,
+				8EE762A71F8F687C0070675C /* ShoutcastController.m in Sources */,
 				6BB6AAA2123637E2001C9AD9 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "DAAPRequestReply.h"
 #import "DetailViewController.h"
+#import "ShoutcastController.h"
 
 @protocol MasterViewDelegate
 
@@ -25,6 +26,7 @@
 	IBOutlet DetailViewController *detailViewController;
 	id<MasterViewDelegate> delegate;
 	BOOL initialState;
+    ShoutcastController *shoutcastController;
 }
 
 @property (nonatomic, retain) NSArray *results;

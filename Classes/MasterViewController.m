@@ -81,7 +81,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) return 3;
+	if (section == 0) return 5;
 	else return [self.results count];
     //return [self.results count];
 	//return 1;
@@ -121,7 +121,15 @@
 			cell.textLabel.text = NSLocalizedString(@"podcasts", @"Podcasts");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"podcast-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"podcast.png"];
-		}
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = NSLocalizedString(@"shoutcast", @"Shoutcast");
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
+            cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
+        } else if (indexPath.row == 4) {
+            cell.textLabel.text = NSLocalizedString(@"spotify", @"Spotify");
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
+            cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
+        }
 	} else {
 		DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
 		cell.textLabel.text = mlit.name;
@@ -163,11 +171,25 @@
 		} else if (indexPath.row == 1) {
 			[detailViewController changeToBookView];
 			[self.delegate didSelectBooksOrPodcasts];
-		}
-		else if (indexPath.row == 2) {
+		} else if (indexPath.row == 2) {
 			[detailViewController changeToPodcastView];
 			[self.delegate didSelectBooksOrPodcasts];
-		}
+        } else if (indexPath.row == 3) {
+            // open shoutcast
+            if (shoutcastController == nil) {
+                NSLog(@"create shoutcast");
+                shoutcastController = [[ShoutcastController alloc] initWithNibName:@"ShoutcastController" bundle:nil];
+                shoutcastController.modalPresentationStyle = UIModalPresentationFormSheet;
+                [shoutcastController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+            }
+            [self presentModalViewController:shoutcastController animated:YES];
+            shoutcastController.view.superview.frame = CGRectMake(0, 0, 649,397);
+            shoutcastController.view.superview.center = self.view.center;
+        } else if (indexPath.row ==4) {
+            // open spotify app
+            NSURL *url = [NSURL URLWithString:@"spotify://"];
+            [[UIApplication sharedApplication] openURL:url];
+        }
 	} else if (indexPath.section == 1){
 		DAAPResponsemlit *playlist = [self.results objectAtIndex:indexPath.row];
 		[detailViewController changeToPlaylistView:[playlist.miid longValue] persistentId:[playlist.persistentId longLongValue]];
