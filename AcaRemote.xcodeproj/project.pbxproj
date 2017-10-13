@@ -166,6 +166,7 @@
 		8EE762A81F8F687C0070675C /* ShoutcastController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE762A61F8F687C0070675C /* ShoutcastController.xib */; };
 		8EE762B31F90CAD30070675C /* WifiConfigController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE762B01F90CAD20070675C /* WifiConfigController.xib */; };
 		8EE762B41F90CAD30070675C /* WifiConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE762B11F90CAD20070675C /* WifiConfigController.m */; };
+		8EE762B81F90CDC10070675C /* CustomHTTPProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE762B61F90CDC10070675C /* CustomHTTPProtocol.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -415,6 +416,8 @@
 		8EE762B01F90CAD20070675C /* WifiConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WifiConfigController.xib; sourceTree = "<group>"; };
 		8EE762B11F90CAD20070675C /* WifiConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiConfigController.m; sourceTree = "<group>"; };
 		8EE762B21F90CAD20070675C /* WifiConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiConfigController.h; sourceTree = "<group>"; };
+		8EE762B61F90CDC10070675C /* CustomHTTPProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomHTTPProtocol.m; sourceTree = "<group>"; };
+		8EE762B71F90CDC10070675C /* CustomHTTPProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomHTTPProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +439,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8EE762B51F90CD700070675C /* HttpProtocol */,
 				8EE762AF1F90CA8F0070675C /* WifiConfig */,
 				8EE762A31F8F68260070675C /* Shoutcast */,
 				6BB6AA9D123637E2001C9AD9 /* UIImage+Alpha.h */,
@@ -837,6 +841,15 @@
 			name = WifiConfig;
 			sourceTree = "<group>";
 		};
+		8EE762B51F90CD700070675C /* HttpProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				8EE762B71F90CDC10070675C /* CustomHTTPProtocol.h */,
+				8EE762B61F90CDC10070675C /* CustomHTTPProtocol.m */,
+			);
+			name = HttpProtocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1042,6 +1055,7 @@
 				6BA5FC1D11C2D0E20009921E /* TracksForAlbumController.m in Sources */,
 				6BD18EB011C4A80700612A33 /* AsyncImageLoader.m in Sources */,
 				6B6C74EC11CAC2CC00AAED4F /* TrackCustomCellClass.m in Sources */,
+				8EE762B81F90CDC10070675C /* CustomHTTPProtocol.m in Sources */,
 				6BEA595111CD10FA00E419EC /* AlbumsDatasource.m in Sources */,
 				6BEA5B9C11CD7EFE00E419EC /* SpeakersViewController.m in Sources */,
 				6BC1C79611CEB6F1006686C9 /* DAAPResponseerror.m in Sources */,

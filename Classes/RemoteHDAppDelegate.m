@@ -14,6 +14,7 @@
 #import "DDLog.h"
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
+#import "CustomHTTPProtocol.h"
 
 @implementation RemoteHDAppDelegate
 
@@ -39,6 +40,8 @@
     [device beginGeneratingDeviceOrientationNotifications];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
+    
+    [NSURLProtocol registerClass:[CustomHTTPProtocol class]];
 
 	return YES;
 }
