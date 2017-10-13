@@ -645,6 +645,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
+- (void) setShoutcast{
+    NSString *string = [NSString stringWithFormat:kRequestShoutcast,self.host,self.port,@"http://37.59.42.207:8355",sessionId];
+    DDLogInfo(@"FDServer-setShoutcast:%@",string);
+    [DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
+- (void) setWifiConfig:(NSString *)ssid pwd:(NSString *)pwd{
+    NSString *string = [NSString stringWithFormat:kRequestWifiConfig,self.host,self.port,ssid,pwd];
+    DDLogInfo(@"FDServer-setWifiConfig:%@",string);
+    [DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
 - (void) toggleShuffle{
 	NSString *string = [NSString stringWithFormat:kRequestChangePropertyShuffle,self.host,self.port,!shuffle,sessionId];
 	if ([DAAPRequestReply request:[NSURL URLWithString:string]]){

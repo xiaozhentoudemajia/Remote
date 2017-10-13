@@ -19,6 +19,8 @@
 #define kRequestPlayStatusUpdate @"^http://%@:%@/ctrl-int/[[:digit:]]+/playstatusUpdate$revision-number=%d&session-id=%d"
 #define kRequestPropertyVolume @"http://%@:%@/ctrl-int/1/getproperty?properties=dmcp.volume&session-id=%d"
 #define kRequestChangePropertyVolume @"http://%@:%@/ctrl-int/1/setproperty?dmcp.volume=%d&session-id=%d"
+#define kRequestShoutcast @"http://%@:%@/ctrl-int/1/setproperty?shoutcast-url=%@&com.apple.itunes.extended-media-kind=1&session-id=%d"
+#define kRequestWifiConfig @"http://%@:%@/wificfg?ssid=%@&password=%@"
 #define kRequestChangePropertyShuffle @"http://%@:%@/ctrl-int/1/setproperty?dacp.shufflestate=%d&session-id=%d"
 #define kRequestChangePropertyRepeat @"http://%@:%@/ctrl-int/1/setproperty?dacp.repeatstate=%d&session-id=%d"
 #define kRequestPlayLists @"http://%@:%@/databases/%d/containers?session-id=%d&meta=dmap.itemname,dmap.itemcount,dmap.itemid,dmap.persistentid,daap.baseplaylist,com.apple.itunes.special-playlist,com.apple.itunes.smart-playlist,com.apple.itunes.saved-genius,dmap.parentcontainerid,dmap.editcommandssupported,com.apple.itunes.jukeboxcurrent,daap.songcontentdescription"

@@ -14,8 +14,9 @@
 #import "AsyncImageView.h"
 #import "SessionManager.h"
 #import "NowPlayingDetailViewController.h"
+#import "WifiConfigController.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, DAAPRequestDelegate, MasterViewDelegate, NowPlayingDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, DAAPRequestDelegate, MasterViewDelegate, NowPlayingDelegate, WifiConfigDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;
@@ -47,7 +48,8 @@
 	NowPlayingDetailViewController *nowPlayingDetail;
 	BOOL nowPlayingDetailShown;
 	BOOL librariesShown;
-	
+    WifiConfigController *wifiConfigController;
+
 @private 
 	BOOL _editingPlayingTime;
 }

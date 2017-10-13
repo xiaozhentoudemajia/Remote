@@ -260,6 +260,21 @@
 }
 
 #pragma mark -
+#pragma mark WifiConfigDelegate methods
+
+- (void) didFinishWifiConfig {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)didSetWifiConfig:(NSString *)ssid pwd:(NSString *)pwd  {
+    [self dismissModalViewControllerAnimated:YES];
+    FDServer *server = CurrentServer;
+    if (server != nil) {
+        [server setWifiConfig:ssid pwd:pwd];
+    }
+}
+
+#pragma mark -
 #pragma mark LibraryDelegate methods
 
 - (void) didFinishEditingLibraries {
@@ -316,6 +331,21 @@
 - (void)didSelectBooksOrPodcasts{
 	segmentedControl.hidden = YES;
 	[self _switchedToDifferentView];
+}
+
+- (void)didSelectShoutCast{
+    segmentedControl.hidden = YES;
+}
+
+- (void)didSelectWifiConfig{
+    // wifi config
+    if (wifiConfigController == nil) {
+        wifiConfigController = [[WifiConfigController alloc ] initWithNibName:@"WifiConfigController" bundle:nil];
+        wifiConfigController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [wifiConfigController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [wifiConfigController setDelegate:self];
+    }
+    [self presentModalViewController:wifiConfigController animated:YES];
 }
 
 #pragma mark -

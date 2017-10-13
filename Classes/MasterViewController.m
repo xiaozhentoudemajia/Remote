@@ -81,7 +81,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) return 5;
+	if (section == 0) return 6;
 	else return [self.results count];
     //return [self.results count];
 	//return 1;
@@ -127,6 +127,10 @@
             cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
         } else if (indexPath.row == 4) {
             cell.textLabel.text = NSLocalizedString(@"spotify", @"Spotify");
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
+            cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
+        } else if (indexPath.row == 5) {
+            cell.textLabel.text = NSLocalizedString(@"wifi config", @"Wifi Config");
             cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
             cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
         }
@@ -189,6 +193,9 @@
             // open spotify app
             NSURL *url = [NSURL URLWithString:@"spotify://"];
             [[UIApplication sharedApplication] openURL:url];
+        } else if (indexPath.row == 5) {
+            // open wifi config
+            [self.delegate didSelectWifiConfig];
         }
 	} else if (indexPath.section == 1){
 		DAAPResponsemlit *playlist = [self.results objectAtIndex:indexPath.row];

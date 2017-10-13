@@ -164,6 +164,8 @@
 		8E7152551F67D89200512017 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E71524E1F67D89200512017 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8EE762A71F8F687C0070675C /* ShoutcastController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE762A51F8F687C0070675C /* ShoutcastController.m */; };
 		8EE762A81F8F687C0070675C /* ShoutcastController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE762A61F8F687C0070675C /* ShoutcastController.xib */; };
+		8EE762B31F90CAD30070675C /* WifiConfigController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE762B01F90CAD20070675C /* WifiConfigController.xib */; };
+		8EE762B41F90CAD30070675C /* WifiConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE762B11F90CAD20070675C /* WifiConfigController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -410,6 +412,9 @@
 		8EE762A41F8F687C0070675C /* ShoutcastController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoutcastController.h; sourceTree = "<group>"; };
 		8EE762A51F8F687C0070675C /* ShoutcastController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoutcastController.m; sourceTree = "<group>"; };
 		8EE762A61F8F687C0070675C /* ShoutcastController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoutcastController.xib; sourceTree = "<group>"; };
+		8EE762B01F90CAD20070675C /* WifiConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WifiConfigController.xib; sourceTree = "<group>"; };
+		8EE762B11F90CAD20070675C /* WifiConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiConfigController.m; sourceTree = "<group>"; };
+		8EE762B21F90CAD20070675C /* WifiConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiConfigController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +436,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8EE762AF1F90CA8F0070675C /* WifiConfig */,
 				8EE762A31F8F68260070675C /* Shoutcast */,
 				6BB6AA9D123637E2001C9AD9 /* UIImage+Alpha.h */,
 				6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */,
@@ -821,6 +827,16 @@
 			name = Shoutcast;
 			sourceTree = "<group>";
 		};
+		8EE762AF1F90CA8F0070675C /* WifiConfig */ = {
+			isa = PBXGroup;
+			children = (
+				8EE762B21F90CAD20070675C /* WifiConfigController.h */,
+				8EE762B11F90CAD20070675C /* WifiConfigController.m */,
+				8EE762B01F90CAD20070675C /* WifiConfigController.xib */,
+			);
+			name = WifiConfig;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -893,6 +909,7 @@
 				6B6C747111CABBA700AAED4F /* iTunes.png in Resources */,
 				6B6C74E711CAC02C00AAED4F /* TrackCustomCell.xib in Resources */,
 				6BEA59E411CD280900E419EC /* ToolbarBackground.png in Resources */,
+				8EE762B31F90CAD30070675C /* WifiConfigController.xib in Resources */,
 				6BEA5AAF11CD656000E419EC /* sliderPin.png in Resources */,
 				6BEA5AB011CD656000E419EC /* slider2.png in Resources */,
 				6BEA5AB111CD656000E419EC /* slider1.png in Resources */,
@@ -1019,6 +1036,7 @@
 				6BE2B34111C05EA000EE6AC7 /* DAAPRequest.m in Sources */,
 				8E7152501F67D89200512017 /* DDASLLogCapture.m in Sources */,
 				6B12EB4D11C1A6550051958A /* ArtistDatasource.m in Sources */,
+				8EE762B41F90CAD30070675C /* WifiConfigController.m in Sources */,
 				6BA5FB1511C2BDFB0009921E /* AlbumsOfArtistController.m in Sources */,
 				6BA5FB4311C2C2AA0009921E /* DAAPResponseagal.m in Sources */,
 				6BA5FC1D11C2D0E20009921E /* TracksForAlbumController.m in Sources */,
