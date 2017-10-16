@@ -645,8 +645,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
-- (void) setShoutcast{
-    NSString *string = [NSString stringWithFormat:kRequestShoutcast,self.host,self.port,@"http://37.59.42.207:8355",sessionId];
+- (void) setShoutcast:(NSString *)url{
+    NSString *string = [NSString stringWithFormat:kRequestShoutcast,self.host,self.port,url,sessionId];
     DDLogInfo(@"FDServer-setShoutcast:%@",string);
     [DAAPRequestReply request:[NSURL URLWithString:string]];
 }

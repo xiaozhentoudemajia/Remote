@@ -163,7 +163,7 @@ typedef enum {
 - (void) updateStatus;
 - (void) getVolume:(id<DAAPRequestDelegate>)aDelegate action:(SEL)action;
 - (void) setVolume:(long) volume;
-- (void) setShoutcast;
+- (void) setShoutcast:(NSString *)url;
 - (void) setWifiConfig:(NSString *)ssid pwd:(NSString *)pwd;
 - (void) toggleShuffle;
 - (void) toggleRepeatState;

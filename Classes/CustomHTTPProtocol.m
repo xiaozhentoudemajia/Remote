@@ -92,46 +92,27 @@ static NSString * const hasInitKey = @"JYCustomDataProtocolKey";
  *  suffer an infinite recursive death).
  */
 
-static NSString * kOurRecursiveRequestFlagProperty = @"com.apple.dts.CustomHTTPProtocol";
-
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
     if ([NSURLProtocol propertyForKey:hasInitKey inRequest:request]) {
         return NO;
     }
 
-    NSLog(@"YXNSURLProtocol==%@",request.URL.absoluteString);
+    NSString * url = request.URL.absoluteString;
+    if ([url rangeOfString:@"?icy"].location != NSNotFound && [url rangeOfString:@"shoutcast-url"].location == NSNotFound) {
+        NSLog(@"Get shoutcast url by URLProtocol = %@",request.URL.absoluteString);
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:request.URL.absoluteString forKey:@"shoutcast"];
+        [defaults synchronize];
+    }
+
     return NO;
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
 {
-    NSMutableURLRequest *mutableReqeust = [request mutableCopy];
-    //这边可用干你想干的事情。。更改地址，或者设置里面的请求头。。
-    return mutableReqeust;
-}
-
-- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client {
-    return [super initWithRequest:request cachedResponse:cachedResponse client:client];
-}
-
-- (void)URLProtocol:(NSURLProtocol *)protocol didReceiveResponse:(NSURLResponse *)response cacheStoragePolicy:(NSURLCacheStoragePolicy)policy;
-{
-    
-}
-
-+ (BOOL)requestIsCacheEquivalent:(NSURLRequest *)a toRequest:(NSURLRequest *)b
-{
-    return YES;
-}
-
-- (void)dealloc
-{
-    // can be called on any thread
-//    [[self class] customHTTPProtocol:self logWithFormat:@"dealloc"];
-    assert(self->_task == nil);                     // we should have cleared it by now
-    assert(self->_pendingChallenge == nil);         // we should have cancelled it by now
-    assert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
+    return request;
 }
 
 - (void)startLoading
@@ -140,32 +121,7 @@ static NSString * kOurRecursiveRequestFlagProperty = @"com.apple.dts.CustomHTTPP
     NSMutableURLRequest *mutableReqeust = [[self request] mutableCopy];
     //做下标记，防止递归调用
     [NSURLProtocol setProperty:@YES forKey:hasInitKey inRequest:mutableReqeust];
-    
-    //这边就随便你玩了。。可以直接返回本地的模拟数据，进行测试
-    
-    BOOL enableDebug = NO;
-    
-    if (enableDebug) {
-        
-        NSString *str = @"测试数据";
-        
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSURLResponse *response = [[NSURLResponse alloc] initWithURL:mutableReqeust.URL
-                                                            MIMEType:@"text/plain"
-                                               expectedContentLength:data.length
-                                                    textEncodingName:nil];
-        [self.client URLProtocol:self
-              didReceiveResponse:response
-              cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-        
-        [self.client URLProtocol:self didLoadData:data];
-        [self.client URLProtocolDidFinishLoading:self];
-    }
-    else {
-        self.connection = [NSURLConnection connectionWithRequest:mutableReqeust delegate:self];
-    }
-    
+    self.connection = [NSURLConnection connectionWithRequest:mutableReqeust delegate:self];
 }
 
 - (void)stopLoading
@@ -196,6 +152,5 @@ static NSString * kOurRecursiveRequestFlagProperty = @"com.apple.dts.CustomHTTPP
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     [self.client URLProtocolDidFinishLoading:self];
 }
-
 
 @end

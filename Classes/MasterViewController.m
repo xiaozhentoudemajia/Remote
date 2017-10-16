@@ -183,7 +183,7 @@
             if (shoutcastController == nil) {
                 NSLog(@"create shoutcast");
                 shoutcastController = [[ShoutcastController alloc] initWithNibName:@"ShoutcastController" bundle:nil];
-                shoutcastController.modalPresentationStyle = UIModalPresentationFormSheet;
+                shoutcastController.modalPresentationStyle = UIModalPresentationFullScreen;
                 [shoutcastController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
             }
             [self presentModalViewController:shoutcastController animated:YES];

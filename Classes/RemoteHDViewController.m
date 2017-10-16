@@ -23,6 +23,8 @@
 
 @interface RemoteHDViewController(PrivateMethods)
 
+- (void) _shoutCastTask;
+- (void) _setShoutcast:(NSString *)url;
 - (void) _updateVolume;
 - (void) _displayNoLib;
 - (void) _updateTime;
@@ -110,6 +112,8 @@
 	
 	// init the editing playing time state
 	_editingPlayingTime = NO;
+
+    [self _shoutCastTask];
 }
 
 - (void) viewDidAppear:(BOOL)animated{
@@ -342,14 +346,44 @@
     if (wifiConfigController == nil) {
         wifiConfigController = [[WifiConfigController alloc ] initWithNibName:@"WifiConfigController" bundle:nil];
         wifiConfigController.modalPresentationStyle = UIModalPresentationFormSheet;
-        [wifiConfigController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [wifiConfigController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         [wifiConfigController setDelegate:self];
     }
+//    wifiConfigController.preferredContentSize = CGSizeMake(300, 300);
     [self presentModalViewController:wifiConfigController animated:YES];
+    wifiConfigController.view.superview.bounds = CGRectMake(0, 0, 200, 200);
+//    wifiConfigController.view.superview.frame = CGRectMake(0, 0, 100, 100);
+//    wifiConfigController.view.superview.center = self.view.center;
 }
 
 #pragma mark -
 #pragma mark private methods
+
+- (void) _shoutCastTask{
+    dispatch_queue_t queue = dispatch_queue_create("monitor.queue", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(queue, ^{
+        NSString *url = @"none";
+        NSString *account = @"none";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:@"none" forKey:@"shoutcast"];
+        [defaults synchronize];
+        while(1) {
+            account = [defaults objectForKey:@"shoutcast"];
+            if (![url isEqualToString:account] && account != nil) {
+                DDLogVerbose(@"set shoutcast by daap ----- %@", account);
+                url = account;
+                FDServer *server = CurrentServer;
+                [server setShoutcast:url];
+            }
+            [NSThread sleepForTimeInterval:0.5];
+        }
+    });
+}
+
+- (void) _setShoutcast:(NSString *)url{
+    FDServer *server = CurrentServer;
+    [server setShoutcast:url];
+}
 
 - (void) _updateVolume{
 	DDLogVerbose(@"updating volume");
